@@ -12,7 +12,7 @@ const Register = () => {
     const submitHandler = async (values) => {
         setLoading(true);
         try {
-            await axios.post("/api/v1/users/register", values);  // Ensure this endpoint matches your server route
+            await axios.post("/users/register", values);  // Ensure this endpoint matches your server route
             message.success("Registration Successful");
             setLoading(false);
             navigate("/login");
