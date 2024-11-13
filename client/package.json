@@ -1,5 +1,5 @@
 {
-  "proxy": "https://expense-management-system-py16-git-main-prashant1694s-projects.vercel.app",
+  "proxy": "https://expense-management-system-backend-t2f3.onrender.com",
   "name": "client",
   "version": "0.1.0",
   "private": true,
