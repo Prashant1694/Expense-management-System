@@ -1,0 +1,54 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.content{
+  height: 100vh;
+}
+
+.register-page{
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80 vh;
+}
+.l-reg{
+  display: flex;
+  justify-content: center;
+}
+.btn-reg{
+  display: flex;
+  justify-content: center;
+  /*padding-top:10px ;*/
+}
+/*transaction page*/
+.filters{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  box-shadow: 0 0 3px grey;
+}
+/*antd icons*/
+.switch-icons{
+  box-shadow: 0 0 15px rgba(0, 0, 0, .677);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.anticon svg{
+  font-size: 20px;
+  cursor: pointer;
+}
+.active-icon{
+  color: black;
+}
+.inactive-icon{
+  color: gray;
+}
+.time{
+  display: block;
+  align-items: center;
+}
