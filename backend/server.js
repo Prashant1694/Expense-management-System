@@ -17,8 +17,13 @@ connectDb();
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json());
+const corsOptions = {
+  origin: 'https://expense-management-system-frontend-seven.vercel.app',  // Allow requests from your frontend's URL (e.g., React on localhost:3000)
+  methods: 'GET,POST,PUT,DELETE',  // Allow specific HTTP methods
+  allowedHeaders: 'Content-Type,Authorization',  // Allow headers (e.g., for JSON and Auth tokens)
+};
 //app.use(express.static("public"));
-app.use(cors());
+app.use(cors(corsOptions));
 
 //user routes
 //routes
