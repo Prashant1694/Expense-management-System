@@ -17,6 +17,7 @@ connectDb();
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.static("public"));
 app.use(cors());
 
 //user routes
