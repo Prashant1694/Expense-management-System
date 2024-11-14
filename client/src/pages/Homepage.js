@@ -50,7 +50,7 @@ const Homepage = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
-      const res = await axios.post("/api/v1/transactions/getTransaction", {
+      const res = await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/getTransaction", {
         userid: user._id,
         frequency,
         selectedDate,
@@ -79,7 +79,7 @@ const Homepage = () => {
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/api/v1/transactions/deleteTransaction", {
+      await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/deleteTransaction", {
         transactionId: record._id,
       });
       setLoading(false);
@@ -98,7 +98,7 @@ const Homepage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/api/v1/transactions/editTransaction", {
+        await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/editTransaction", {
           payload: {
             ...values,
             userId: user._id,
@@ -108,7 +108,7 @@ const Homepage = () => {
         getAllTransactions();
         message.success("Transaction Updated Successfully");
       } else {
-        await axios.post("/api/v1/transactions/addTransaction", {
+        await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/addTransaction", {
           ...values,
           userid: user._id,
         });
