@@ -1,5 +1,4 @@
 {
-  "proxy": "https://expense-management-system-backend-t2f3.onrender.com",
   "name": "client",
   "version": "0.1.0",
   "private": true,
