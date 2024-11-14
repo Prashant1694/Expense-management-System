@@ -18,10 +18,14 @@ connectDb();
 app.use(morgan("dev"));
 app.use(express.json());
 const corsOptions = {
-  origin: 'https://expense-management-system-frontend-seven.vercel.app',  // Allow requests from your frontend's URL (e.g., React on localhost:3000)
-  //methods: 'GET,POST,PUT,DELETE',  // Allow specific HTTP methods
-  //allowedHeaders: 'Content-Type,Authorization',  // Allow headers (e.g., for JSON and Auth tokens)
+  origin: [
+    'http://localhost:3000',  // Allow requests from localhost for local development
+    'https://expense-management-system-delta.vercel.app' // Allow requests from Vercel-deployed frontend
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
+app.options('*', cors(corsOptions)); // This handles preflight requests globally
 //app.use(express.static("public"));
 app.use(cors(corsOptions));
 
