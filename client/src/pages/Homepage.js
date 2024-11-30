@@ -191,7 +191,7 @@ const Homepage = () => {
         <div>
           <h6>Select Type</h6>
           <Select value={Type} onChange={(values) => setType(values)}>
-            <Select.Option value="All">All</Select.Option>
+            <Select.Option value="All">All Transactions</Select.Option>
             <Select.Option value="Income">Income</Select.Option>
             <Select.Option value="Expense">Expense</Select.Option>
           </Select>
