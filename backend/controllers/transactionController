@@ -3,29 +3,39 @@ const moment = require("moment");
 
 const getAllTransaction = async (req, res) => {
   try {
-    const { frequency, selectedDate, Type } = req.body;
-    const getAllTransaction = await transactionModel.find({
-      ...(frequency !== "custom"
-        ? {
-            Date: {
-              $gt: moment().subtract(Number(frequency), "d").toDate(),
-            },
-          }
-        : {
-            Date: {
-              $gte: selectedDate[0],
-              $lte: selectedDate[1],
-            },
-          }),
-      userid: req.body.userid,
-      ...(Type !== "All" && { Type }),
-    });
-    return res.status(200).json(getAllTransaction);
+    const { frequency, selectedDate, Type, userid } = req.body;
+
+    const query = { userid };
+
+    // Add date filtering logic
+    if (frequency !== "All") {
+      if (frequency !== "custom") {
+        query.Date = {
+          $gt: moment().subtract(Number(frequency), "d").toDate(),
+        };
+      } else {
+        query.Date = {
+          $gte: new Date(selectedDate[0]),
+          $lte: new Date(selectedDate[1]),
+        };
+      }
+    }
+
+    // Add type filtering if not "All"
+    if (Type !== "All") {
+      query.Type = Type;
+    }
+
+    // Fetch transactions
+    const transactions = await transactionModel.find(query);
+
+    return res.status(200).json(transactions);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json(error);
   }
 };
+
 const deleteTransaction = async (req, res) => {
   try {
     await transactionModel.findOneAndDelete({ _id: req.body.transactionId });
