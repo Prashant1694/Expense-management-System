@@ -18,7 +18,7 @@ const Homepage = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [allTransaction, setAllTransaction] = useState([]);
-  const [frequency, setFrequency] = useState("7");
+  const [frequency, setFrequency] = useState("*");
   const [selectedDate, setSelectedDate] = useState([]);
   const [Type, setType] = useState("All");
   const [viewData, setViewData] = useState("table");
