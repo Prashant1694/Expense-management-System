@@ -1,56 +1,106 @@
 
-# Expense Management System
+# 💰 Expense Management System
 
-This is a full-stack Expense Management System developed using Java (Spring Boot) for the backend and Angular for the frontend. It allows users to register, log in, and manage their expenses with CRUD operations and analytics.
+A full-stack web application for tracking and managing personal or business finances. Users can log income and expenses, categorize them, and analyze spending habits through intuitive charts and tables.
 
-## Features
+[Live Demo](https://expense-management-system-delta.vercel.app) | [GitHub Repo](https://github.com/Prashant1694/Expense-management-System)
 
-- User Registration & Authentication
-- Add, Update, Delete Expenses
-- View Expense Summary & Analytics
-- JWT Based Authentication
-- RESTful APIs with Spring Boot
-- Angular Frontend with Material UI
+---
 
-## Technologies Used
+## ✨ Features
 
-### Backend
-- Java 17
-- Spring Boot
-- Spring Security
-- JPA / Hibernate
-- MySQL
-- JWT
+- 🔐 **User Authentication**: Secure registration and login.
+- 📊 **Dashboard Overview**:
+  - Total Transactions, Turnover
+  - Pie charts for income vs expense ratio
+- 📆 **Filter by Time**: View data for the last week, last month, or all transactions.
+- 📂 **Category-wise Breakdown**:
+  - Income and expenses grouped into user-defined categories.
+- 🔄 **Transaction Management**:
+  - Add, edit, and delete transactions.
+- 📈 **View Toggle**: Switch between tabular list and chart visualizations.
 
-### Frontend
-- Angular
-- Angular Material
-- RxJS
+---
 
-## Getting Started
+## 🖼️ Screenshots
 
-### Prerequisites
-- Java 17
-- Node.js & Angular CLI
-- MySQL
+### Dashboard Overview
+![Dashboard](./screenshots/Screenshot%202024-12-02%20134613.png)
 
-### Backend Setup
+### Category-wise Expense & Income
+![Category Breakdown](./screenshots/Screenshot%202024-12-02%20134646.png)
+
+### Transaction Table View
+![Transaction Table](./screenshots/Screenshot%202024-12-02%20134818.png)
+
+### Add/Edit Transactions
+![Add/Edit](./screenshots/Screenshot%202024-12-02%20134957.png)
+
+### Authentication - Login & Register
+![Login](./screenshots/Screenshot%202024-12-02%20135026.png)
+![Register](./screenshots/Screenshot%202024-12-02%20135054.png)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Tokens)
+- **Deployment**: Vercel (Frontend), Render/Heroku (Backend if applicable)
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
 ```bash
-cd backend
-./mvnw spring-boot:run
+git clone https://github.com/Prashant1694/Expense-management-System.git
+cd Expense-management-System
 ```
 
-### Frontend Setup
+### 2. Install Dependencies
 ```bash
-cd frontend
 npm install
-ng serve
+# or
+yarn install
 ```
 
-## Screenshots
+### 3. Run Locally
+```bash
+npm start
+```
 
-Screenshots are available in the `/screenshots` folder.
+> Make sure to set up `.env` for backend services (if separate) including:
+```
+MONGO_URI=
+JWT_SECRET=
+```
 
-## License
+---
+
+## 📁 Folder Structure
+
+```
+.
+├── client/                # React frontend
+├── server/                # Express backend
+├── public/
+├── screenshots/           # UI images for README
+├── .env
+└── README.md
+```
+
+---
+
+## 🧑‍💻 Author
+
+**Prashant**  
+🔗 [GitHub](https://github.com/Prashant1694)
+
+---
+
+## 📜 License
 
 This project is licensed under the MIT License.
