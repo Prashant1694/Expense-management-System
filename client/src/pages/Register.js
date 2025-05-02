@@ -31,6 +31,7 @@ const Register = () => {
     }, [navigate]);
 
     return (
+        console.log("Waking up The Server! Please Wait, This May Take A Moment")
         <div className="register-page">
             {loading && <Spinner />}
             <Form layout="vertical" onFinish={submitHandler}>
