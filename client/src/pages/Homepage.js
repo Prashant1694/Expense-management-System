@@ -174,12 +174,12 @@ const Homepage = () => {
       <div className="filters">
         <div>
           <h6>Select Frequency</h6>
-          <Select defaultValue="all" onChange={(value) => setFrequency(value)}>
+          <Select defaultValue="All" onChange={(value) => setFrequency(value)}>
             <Option value="7">Last 1 Week</Option>
             <Option value="30">Last 1 Month</Option>
             <Option value="365">Last 1 Year</Option>
             <Option value="custom">Custom</Option>
-            <Option value="all">All Transactions</Option>
+            <Option value="All">All Transactions</Option>
           </Select>
 
           {frequency === "custom" && (
