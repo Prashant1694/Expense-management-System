@@ -1,54 +1,137 @@
-*{
+/* RESET */
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.content{
+/* GLOBAL CONTENT WRAPPER */
+.content {
   height: 100vh;
 }
 
-.register-page{
+/* LOGIN & REGISTER PAGE STYLES */
+.register-page {
   width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80 vh;
+  padding: 20px;
 }
-.l-reg{
+
+.ant-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.ant-form h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333333;
+  font-weight: 600;
+}
+
+.ant-form-item label {
+  font-weight: 500;
+  color: #333;
+}
+
+.l-reg {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 }
-.btn-reg{
+
+.l-reg a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.l-reg a:hover {
+  text-decoration: underline;
+}
+
+.btn-reg {
   display: flex;
   justify-content: center;
-  /*padding-top:10px ;*/
+  margin-top: 20px;
 }
-/*transaction page*/
-.filters{
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background-color: #1890ff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #176bd4;
+}
+
+/* SPINNER MESSAGE */
+.spinner-message {
+  position: fixed;
+  top: 60%;
+  width: 100%;
+  text-align: center;
+  z-index: 1001;
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* TRANSACTION FILTERS (Unchanged) */
+.filters {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 20px;
   box-shadow: 0 0 3px grey;
 }
-/*antd icons*/
-.switch-icons{
-  box-shadow: 0 0 15px rgba(0, 0, 0, .677);
+
+/* ICON STYLING */
+.switch-icons {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.677);
   border-radius: 5px;
   padding: 5px 10px;
 }
-.anticon svg{
+
+.anticon svg {
   font-size: 20px;
   cursor: pointer;
 }
-.active-icon{
+
+.active-icon {
   color: black;
 }
-.inactive-icon{
+
+.inactive-icon {
   color: gray;
 }
-.time{
+
+.time {
   display: block;
   align-items: center;
+}
+
+/* RESPONSIVENESS */
+@media (max-width: 480px) {
+  .ant-form {
+    padding: 30px 20px;
+  }
+
+  .btn-primary {
+    font-size: 14px;
+  }
 }
