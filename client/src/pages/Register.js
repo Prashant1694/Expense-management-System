@@ -8,23 +8,25 @@ import Spinner from '../components/layouts/Spinner';
 const Register = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [customMsg, setCustomMsg] = useState(''); // 👈 For custom message
 
     const submitHandler = async (values) => {
+        setCustomMsg('Waking up The Server! Please Wait, This May Take A Moment'); // 👈 Set message
         setLoading(true);
         try {
-            await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/register", values);  // Ensure this endpoint matches your server route
-            setMessage('Waking up The Server! Please Wait, This May Take A Moment');
+            await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/register", values);
             message.success("Registration Successful");
             setLoading(false);
+            setCustomMsg('');
             navigate("/login");
         } catch (error) {
             setLoading(false);
+            setCustomMsg('');
             message.error('Something went wrong');
             console.error("Registration Error:", error);
         }
     };
 
-    // Prevent logged-in users from accessing the registration page
     useEffect(() => {
         if (localStorage.getItem('user')) {
             navigate('/');
@@ -32,8 +34,26 @@ const Register = () => {
     }, [navigate]);
 
     return (
-        <div className="register-page">
+        <div className="register-page" style={{ position: 'relative' }}>
             {loading && <Spinner />}
+            {/* 👇 Show custom message */}
+            {loading && customMsg && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: '60%',
+                        width: '100%',
+                        textAlign: 'center',
+                        zIndex: 1001,
+                        fontSize: '18px',
+                        color: '#333',
+                        fontWeight: '500',
+                    }}
+                >
+                    {customMsg}
+                </div>
+            )}
+
             <Form layout="vertical" onFinish={submitHandler}>
                 <h1>Registration Form</h1>
                 <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please enter your name' }]}>
@@ -49,11 +69,11 @@ const Register = () => {
                     <Link to={'/login'}>Already a User? Login Here</Link>
                 </div>
                 <div className="btn-reg">
-                    <button className="btn btn-primary" type="submit">Register</button> {/* Ensure button type="submit" */}
+                    <button className="btn btn-primary" type="submit">Register</button>
                 </div>
-                    
             </Form>
         </div>
     );
 };
+
 export default Register;
