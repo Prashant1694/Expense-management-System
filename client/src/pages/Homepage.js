@@ -174,13 +174,14 @@ const Homepage = () => {
       <div className="filters">
         <div>
           <h6>Select Frequency</h6>
-          <Select value={frequency} onChange={(values) => setFrequency(values)}>
-            <Select.Option value="All">All Transactions</Select.Option>
-            <Select.Option value="7">Last 1 Week</Select.Option>
-            <Select.Option value="30">Last 1 Month</Select.Option>
-            <Select.Option value="365">Last 1 Year</Select.Option>
-            <Select.Option value="custom">Custom</Select.Option>
+          <Select defaultValue="all" onChange={(value) => setFrequency(value)}>
+            <Option value="7">Last 1 Week</Option>
+            <Option value="30">Last 1 Month</Option>
+            <Option value="365">Last 1 Year</Option>
+            <Option value="custom">Custom</Option>
+            <Option value="all">All Transactions</Option>
           </Select>
+
           {frequency === "custom" && (
             <RangePicker
               value={selectedDate}
