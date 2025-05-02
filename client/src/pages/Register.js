@@ -31,7 +31,6 @@ const Register = () => {
     }, [navigate]);
 
     return (
-        console.log("Waking up The Server! Please Wait, This May Take A Moment")
         <div className="register-page">
             {loading && <Spinner />}
             <Form layout="vertical" onFinish={submitHandler}>
@@ -51,6 +50,7 @@ const Register = () => {
                 <div className="btn-reg">
                     <button className="btn btn-primary" type="submit">Register</button> {/* Ensure button type="submit" */}
                 </div>
+    console.log("Waking up The Server! Please Wait, This May Take A Moment");
             </Form>
         </div>
     );
