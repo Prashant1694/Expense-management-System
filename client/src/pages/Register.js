@@ -13,6 +13,7 @@ const Register = () => {
         setLoading(true);
         try {
             await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/register", values);  // Ensure this endpoint matches your server route
+            setMessage('Waking up The Server! Please Wait, This May Take A Moment');
             message.success("Registration Successful");
             setLoading(false);
             navigate("/login");
@@ -50,7 +51,7 @@ const Register = () => {
                 <div className="btn-reg">
                     <button className="btn btn-primary" type="submit">Register</button> {/* Ensure button type="submit" */}
                 </div>
-                    Waking up The Server! Please Wait, This May Take A Moment
+                    
             </Form>
         </div>
     );
