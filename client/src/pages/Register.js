@@ -50,9 +50,7 @@ const Register = () => {
                 <div className="btn-reg">
                     <button className="btn btn-primary" type="submit">Register</button> {/* Ensure button type="submit" */}
                 </div>
-                <div>
-                    console.log("Waking up The Server! Please Wait, This May Take A Moment");
-                </div>
+                    Waking up The Server! Please Wait, This May Take A Moment
             </Form>
         </div>
     );
