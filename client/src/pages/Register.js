@@ -5,29 +5,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../components/layouts/Spinner';
 
-const submitHandler = async (values) => {
-    setCustomMsg('Waking up The Server! Please Wait, This May Take A Moment');
-    setLoading(true);
-    try {
-        await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/register", values);
-        message.success("Registration Successful");
-        setLoading(false);
-        setCustomMsg('');
-        navigate("/login");
-    } catch (error) {
-        setLoading(false);
-        setCustomMsg('User exists with this E-mail');
+const Register = () => {
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [customMsg, setCustomMsg] = useState(''); // 👈 For custom message
 
-        // Show custom error message from server (like "User already exists")
-        if (error.response && error.response.data && error.response.data.message) {
-            message.error(error.response.data.message);
-        } else {
+    const submitHandler = async (values) => {
+        setCustomMsg('Waking up The Server! Please Wait, This May Take A Moment'); // 👈 Set message
+        setLoading(true);
+        try {
+            await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/register", values);
+            message.success("Registration Successful");
+            setLoading(false);
+            setCustomMsg('');
+            navigate("/login");
+        } catch (error) {
+            setLoading(false);
+            setCustomMsg('');
             message.error('Something went wrong');
+            console.error("Registration Error:", error);
         }
-
-        console.error("Registration Error:", error);
-    }
-};
+    };
 
     useEffect(() => {
         if (localStorage.getItem('user')) {
