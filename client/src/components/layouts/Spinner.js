@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
+import './Spinner.css'; // optional: if using external CSS
 
-const Spinner = () => {
+const Spinner = ({ message = "Waking up The Server! Please Wait, This May Take A Moment" }) => {
   return (
-    <><button class="btn btn-primary" type="button" disabled>
-              <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-              <span role="status">Please Wait</span>
-          </button></>
-  )
-}
+    <div className="spinner-overlay">
+      <div className="spinner-content">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p>{message}</p>
+      </div>
+    </div>
+  );
+};
 
-export default Spinner
+export default Spinner;
