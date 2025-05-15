@@ -1,4 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ignore node_modules
+node_modules/
+
+# Ignore build output
+build/
+
+# Ignore .env file (environment variables)
+.env
 
 # dependencies
 /node_modules
