@@ -9,7 +9,7 @@ const connectDb = require("./config/connectDb");
 const app = express();
 
 //config  env
-dotenv.config();
+require('dotenv').config();
 
 //call database
 connectDb();
@@ -25,22 +25,18 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
-app.options('*', cors(corsOptions)); // This handles preflight requests globally
+app.options('*', cors(corsOptions)); //preflight requests globally
 //app.use(express.static("public"));
 app.use(cors(corsOptions));
-
+//google auth
+const authRoutes = require('./routes/Auth');
+app.use('/api/auth', authRoutes);
 //user routes
 //routes
-app.use("/api/v1/users", require("./routes/userRoute"));
-//transaction routes
-app.use("/api/v1/transactions", require("./routes/transactionRoutes"));
-//static files
-//app.use(express.static(path.join(__dirname, "./client/build")));
+const userRoutes = require('./routes/userRoute');
+app.use('/api/v1/users', userRoutes);
 
-//app.get("*", function (req, res) {
-// res.sendFile(path.join(__dirname, "./client/build/index.html"));
-//});
-//port
+app.use("/api/v1/transactions", require("./routes/transactionRoutes"));
 const PORT = 8080 || process.env.PORT;
 
 //listen

@@ -4,6 +4,7 @@ import { Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../components/layouts/Spinner';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const submitHandler = async (values) => {
-    setCustomMsg('Waking up The Server! Please Wait, This May Take A Moment'); // 👈 Set custom message
+    setCustomMsg('Waking up The Server! Please Wait, This May Take A Moment');
     setLoading(true);
     try {
       const { data } = await axios.post(
@@ -21,13 +22,41 @@ const Login = () => {
       setLoading(false);
       setCustomMsg('');
       message.success('Login Successful');
-      localStorage.setItem('user', JSON.stringify({ ...data.user, password: "" }));
+      localStorage.setItem('user', JSON.stringify({ ...data.user, password: '' }));
       navigate('/');
     } catch (error) {
       setLoading(false);
       setCustomMsg('');
       console.error(error);
       message.error('Something went wrong');
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setLoading(true);
+    setCustomMsg('Signing in with Google...');
+    try {
+      const res = await fetch('http://localhost:8080/api/auth/google-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: credentialResponse.credential }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', data.token);
+        message.success('Signed in successfully with Google');
+        navigate('/');
+      } else {
+        message.error(data.message || 'Google sign-in failed');
+      }
+    } catch (err) {
+      console.error(err);
+      message.error('Google sign-in error');
+    } finally {
+      setLoading(false);
+      setCustomMsg('');
     }
   };
 
@@ -74,13 +103,21 @@ const Login = () => {
           <Input type="password" />
         </Form.Item>
         <div className="l-reg">
-          <Link to="/Register">Not A User? Register Here</Link>
+          <Link to="/Register">Not A User? Register</Link>
         </div>
         <div className="btn-reg">
           <button className="btn btn-primary" type="submit">
             Login
           </button>
         </div>
+        <Form.Item style={{ marginTop: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => message.error('Google sign-in failed')}
+            />
+          </div>
+        </Form.Item>
       </Form>
     </div>
   );
