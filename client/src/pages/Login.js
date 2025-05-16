@@ -36,7 +36,7 @@ const Login = () => {
     setLoading(true);
     setCustomMsg('Signing in with Google...');
     try {
-      const res = await fetch('http://localhost:8080/api/auth/google-login', {
+      const res = await fetch('https://expense-management-system-backend-t2f3.onrender.com/api/auth/google-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: credentialResponse.credential }),
