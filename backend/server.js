@@ -9,7 +9,7 @@ const connectDb = require("./config/connectDb");
 const app = express();
 
 //config  env
-require('dotenv').config();
+require("dotenv").config();
 
 //call database
 connectDb();
@@ -19,26 +19,26 @@ app.use(morgan("dev"));
 app.use(express.json());
 const corsOptions = {
   origin: [
-    'http://localhost:3000',  // Allow requests from localhost for local development
-    'https://expense-management-system-delta.vercel.app' // Allow requests from Vercel-deployed frontend
+    "http://localhost:3000", //local
+    "https://expense-management-system-delta.vercel.app", //deployed
   ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
-app.options('*', cors(corsOptions)); //preflight requests globally
-//app.use(express.static("public"));
+app.options("*", cors(corsOptions));
 app.use(cors(corsOptions));
 //google auth
-const authRoutes = require('./routes/Auth');
-app.use('/api/auth', authRoutes);
+const authRoutes = require("./routes/Auth");
+app.use("/api/auth", authRoutes);
 //user routes
-//routes
-const userRoutes = require('./routes/userRoute');
-app.use('/api/v1/users', userRoutes);
-
+const userRoutes = require("./routes/userRoute");
+app.use("/api/v1/users", userRoutes);
+//category routing
+const categoryRoutes = require("./routes/category");
+app.use("/api/v1/categories", require("./routes/category"));
+//transaction routes
 app.use("/api/v1/transactions", require("./routes/transactionRoutes"));
 const PORT = 8080 || process.env.PORT;
-
 //listen
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

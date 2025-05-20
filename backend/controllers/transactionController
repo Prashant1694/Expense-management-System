@@ -1,13 +1,12 @@
 const transactionModel = require("../models/transactionModel");
 const moment = require("moment");
+const User = require("../models/users");
 
 const getAllTransaction = async (req, res) => {
   try {
     const { frequency, selectedDate, Type, userid } = req.body;
 
     const query = { userid };
-
-    // Add date filtering logic
     if (frequency !== "All") {
       if (frequency !== "custom") {
         query.Date = {
@@ -20,15 +19,10 @@ const getAllTransaction = async (req, res) => {
         };
       }
     }
-
-    // Add type filtering if not "All"
     if (Type !== "All") {
       query.Type = Type;
     }
-
-    // Fetch transactions
     const transactions = await transactionModel.find(query);
-
     return res.status(200).json(transactions);
   } catch (error) {
     console.error(error);
@@ -61,12 +55,27 @@ const editTransaction = async (req, res) => {
 
 const addTransaction = async (req, res) => {
   try {
-    const newTransaction = new transactionModel(req.body);
+    const { userId, Category, ...rest } = req.body;
+    if (!userId) {
+      return res.status(400).json({ error: "userId is required in body" });
+    }
+    const user = await User.findById(userId);
+    const categoryToAdd = Array.isArray(Category) ? Category[0] : Category;
+    if (user && !user.categories.includes(categoryToAdd)) {
+      user.categories.push(categoryToAdd);
+      await user.save();
+    }
+    const transactionData = {
+      ...rest,
+      userid: userId,
+      Category: categoryToAdd,
+    };
+    const newTransaction = new transactionModel(transactionData);
     await newTransaction.save();
     return res.status(201).send("Transaction Created");
   } catch (error) {
-    console.log(error);
-    return res.status(500).json(error);
+    console.error("Error creating transaction:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

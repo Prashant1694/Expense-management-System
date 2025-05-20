@@ -16,7 +16,7 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        'https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/login',
+        'http://localhost:8080/api/v1/users/login',
         values
       );
       setLoading(false);
@@ -33,32 +33,38 @@ const Login = () => {
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
-    setLoading(true);
-    setCustomMsg('Signing in with Google...');
-    try {
-      const res = await fetch('https://expense-management-system-backend-t2f3.onrender.com/api/auth/google-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: credentialResponse.credential }),
-      });
+  setLoading(true);
+  setCustomMsg('Signing in with Google...');
 
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        localStorage.setItem('token', data.token);
-        message.success('Signed in successfully with Google');
-        navigate('/');
+  try {
+    const res = await fetch('http://localhost:8080/api/auth/google-login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: credentialResponse.credential }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
+      message.success('Signed in successfully with Google');
+      navigate('/');
+    } else {
+      if (res.status === 401 && data.message === 'User not registered. Please sign up first.') {
+        message.error(data.message);
       } else {
         message.error(data.message || 'Google sign-in failed');
       }
-    } catch (err) {
-      console.error(err);
-      message.error('Google sign-in error');
-    } finally {
-      setLoading(false);
-      setCustomMsg('');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    message.error('Google sign-in error');
+  } finally {
+    setLoading(false);
+    setCustomMsg('');
+  }
+};
 
   useEffect(() => {
     if (localStorage.getItem('user')) {

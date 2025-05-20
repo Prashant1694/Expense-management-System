@@ -1,18 +1,28 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+const defaultCategories = [
+  "Salary",
+  "Trading",
+  "Investment",
+  "Movie",
+  "Bills",
+  "Medical",
+  "Fees",
+  "Food",
+  "Loan",
+  "Other",
+];
 const userschema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'name is required'],
+    required: [true, "name is required"],
   },
   email: {
     type: String,
-    required: [true, 'email is required'],
+    required: [true, "email is required"],
     unique: true,
   },
   password: {
     type: String,
-    // Only required if not a Google-authenticated user
   },
   googleId: {
     type: String,
@@ -23,7 +33,14 @@ const userschema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-}, { timestamps: true });
+  categories: {
+    type: [String],
+    default: defaultCategories,
+  },
+});
+{
+  timestamps: true;
+}
 
-const userModel = mongoose.model('users', userschema);
+const userModel = mongoose.model("users", userschema);
 module.exports = userModel;
