@@ -41,7 +41,7 @@ const Homepage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:8080/api/v1/transactions/getTransaction",
+        "https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/getTransaction",
         {
           userid: user._id,
           frequency,
@@ -106,7 +106,7 @@ const Homepage = () => {
             if (!undo) {
               try {
                 await axios.post(
-                  "http://localhost:8080/api/v1/transactions/deleteTransaction",
+                  "https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/deleteTransaction",
                   { transactionId }
                 );
                 message.success("Transaction deleted permanently");
@@ -131,7 +131,7 @@ const Homepage = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     try {
       const res = await axios.get(
-        `http://localhost:8080/api/v1/categories/${user._id}`
+        `https://expense-management-system-backend-t2f3.onrender.com/api/v1/categories/${user._id}`
       );
       setUserCategories(res.data.categories);
     } catch (error) {
@@ -148,7 +148,7 @@ const Homepage = () => {
     try {
       if (editable) {
         await axios.post(
-          "http://localhost:8080/api/v1/transactions/editTransaction",
+          "https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/editTransaction",
           {
             ...values,
             userId: user._id,
@@ -158,7 +158,7 @@ const Homepage = () => {
         message.success("Transaction Updated");
       } else {
         await axios.post(
-          "http://localhost:8080/api/v1/transactions/addTransaction",
+          "https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/addTransaction",
           {
             ...values,
             userId: user._id,

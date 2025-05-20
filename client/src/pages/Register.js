@@ -15,7 +15,7 @@ const Register = () => {
     setCustomMsg("Waking up The Server! Please Wait, This May Take A Moment");
     setLoading(true);
     try {
-      await axios.post("http://localhost:8080/api/v1/users/register", values);
+      await axios.post("https://expense-management-system-backend-t2f3.onrender.com/api/v1/users/register", values);
       message.success("Registration Successful");
       setLoading(false);
       setCustomMsg("");
@@ -32,7 +32,7 @@ const Register = () => {
     setLoading(true);
     setCustomMsg("Signing up with Google...");
     try {
-      const res = await fetch("http://localhost:8080/api/auth/google-register", {
+      const res = await fetch("https://expense-management-system-backend-t2f3.onrender.com/api/auth/google-register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: credentialResponse.credential }),
