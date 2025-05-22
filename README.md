@@ -48,7 +48,7 @@ A full-stack web application for tracking and managing personal or business fina
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
-- **Deployment**: Vercel (Frontend), Render/Heroku (Backend if applicable)
+- **Deployment**: Vercel (Frontend), Render (Backend)
 
 ---
 
