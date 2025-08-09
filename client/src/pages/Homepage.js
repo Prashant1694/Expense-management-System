@@ -41,7 +41,7 @@ const Homepage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       const res = await axios.post(
-        "https://expense-management-system-backend-t2f3.onrender.com/api/v2/transactions/getTransaction",
+        "https://expense-management-system-backend-t2f3.onrender.com/api/v1/transactions/getTransaction",
         {
           userid: user._id,
           frequency,
